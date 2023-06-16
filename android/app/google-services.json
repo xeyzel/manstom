@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "390952331287",
+    "project_id": "menstom-87645",
+    "storage_bucket": "menstom-87645.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:390952331287:android:7b7f8d2ec18a2099139452",
+        "android_client_info": {
+          "package_name": "com.yehezkielmarbun.inventory_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "390952331287-4sl3rdoa4v58a35in1c08tbq12b6b6hk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwejBBP39q4Iw45Rb01ygKQqLuvLMDucs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "390952331287-4sl3rdoa4v58a35in1c08tbq12b6b6hk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
