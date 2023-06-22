@@ -44,6 +44,7 @@ class _ProductScreenState extends State<ProductScreen> {
         ),
         body: BlocBuilder<CreateProductCubit, CreateProductState>(
           builder: (context, state) {
+
             final products = state.products;
 
             if (state.status == Status.loading) {
@@ -89,7 +90,7 @@ class _ProductScreenState extends State<ProductScreen> {
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
                               return ProductMainFeatureScreen(
-                                product: product,
+                                product: product.copyWith(quantity: 0),
                               );
                             },
                           ));
@@ -104,8 +105,10 @@ class _ProductScreenState extends State<ProductScreen> {
                           children: [
                             Text("Description: ${product.description}"),
                             Text("Warehouse: ${product.warehouseName}"),
-                            Text("Price: ${product.price}"),
+                            Text("Created At: ${Utils.formatDate(product.createdAt)}"),
+                            Text("Price: ${Utils.formatNumberToIdr(product.price)}"),
                             Text("Quantity: ${product.quantity}"),
+                            Text("Total Price: ${Utils.formatNumberToIdr(product.quantity * product.price)}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
                           ],
                         ),
                         trailing: IconButton(

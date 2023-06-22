@@ -12,5 +12,6 @@ class ProductMainFeatureState with _$ProductMainFeatureState {
     @Default(Product()) Product product,
     @Default(0) int price,
     @Default(0) int quantity,
+    @Default(false) bool isAdded,
   }) = _ProductMainFeatureState;
 }

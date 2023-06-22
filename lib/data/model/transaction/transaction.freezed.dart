@@ -28,6 +28,7 @@ mixin _$Transaction {
   String get createdAt => throw _privateConstructorUsedError;
   String get idTransaction => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
+  bool get isIncrease => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +50,8 @@ abstract class $TransactionCopyWith<$Res> {
       String? infoQuantity,
       String createdAt,
       String idTransaction,
-      String userId});
+      String userId,
+      bool isIncrease});
 }
 
 /// @nodoc
@@ -73,6 +75,7 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
     Object? createdAt = null,
     Object? idTransaction = null,
     Object? userId = null,
+    Object? isIncrease = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -107,6 +110,10 @@ class _$TransactionCopyWithImpl<$Res, $Val extends Transaction>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      isIncrease: null == isIncrease
+          ? _value.isIncrease
+          : isIncrease // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -127,7 +134,8 @@ abstract class _$$_TransactionCopyWith<$Res>
       String? infoQuantity,
       String createdAt,
       String idTransaction,
-      String userId});
+      String userId,
+      bool isIncrease});
 }
 
 /// @nodoc
@@ -149,6 +157,7 @@ class __$$_TransactionCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? idTransaction = null,
     Object? userId = null,
+    Object? isIncrease = null,
   }) {
     return _then(_$_Transaction(
       id: null == id
@@ -183,6 +192,10 @@ class __$$_TransactionCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
+      isIncrease: null == isIncrease
+          ? _value.isIncrease
+          : isIncrease // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -198,7 +211,8 @@ class _$_Transaction implements _Transaction {
       this.infoQuantity = "",
       this.createdAt = "",
       this.idTransaction = "",
-      this.userId = ""});
+      this.userId = "",
+      this.isIncrease = false});
 
   factory _$_Transaction.fromJson(Map<String, dynamic> json) =>
       _$$_TransactionFromJson(json);
@@ -227,10 +241,13 @@ class _$_Transaction implements _Transaction {
   @override
   @JsonKey()
   final String userId;
+  @override
+  @JsonKey()
+  final bool isIncrease;
 
   @override
   String toString() {
-    return 'Transaction(id: $id, productName: $productName, warehouseName: $warehouseName, infoPrice: $infoPrice, infoQuantity: $infoQuantity, createdAt: $createdAt, idTransaction: $idTransaction, userId: $userId)';
+    return 'Transaction(id: $id, productName: $productName, warehouseName: $warehouseName, infoPrice: $infoPrice, infoQuantity: $infoQuantity, createdAt: $createdAt, idTransaction: $idTransaction, userId: $userId, isIncrease: $isIncrease)';
   }
 
   @override
@@ -251,13 +268,15 @@ class _$_Transaction implements _Transaction {
                 other.createdAt == createdAt) &&
             (identical(other.idTransaction, idTransaction) ||
                 other.idTransaction == idTransaction) &&
-            (identical(other.userId, userId) || other.userId == userId));
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.isIncrease, isIncrease) ||
+                other.isIncrease == isIncrease));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, productName, warehouseName,
-      infoPrice, infoQuantity, createdAt, idTransaction, userId);
+      infoPrice, infoQuantity, createdAt, idTransaction, userId, isIncrease);
 
   @JsonKey(ignore: true)
   @override
@@ -282,7 +301,8 @@ abstract class _Transaction implements Transaction {
       final String? infoQuantity,
       final String createdAt,
       final String idTransaction,
-      final String userId}) = _$_Transaction;
+      final String userId,
+      final bool isIncrease}) = _$_Transaction;
 
   factory _Transaction.fromJson(Map<String, dynamic> json) =
       _$_Transaction.fromJson;
@@ -303,6 +323,8 @@ abstract class _Transaction implements Transaction {
   String get idTransaction;
   @override
   String get userId;
+  @override
+  bool get isIncrease;
   @override
   @JsonKey(ignore: true)
   _$$_TransactionCopyWith<_$_Transaction> get copyWith =>

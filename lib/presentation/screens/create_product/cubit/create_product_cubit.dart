@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:inventory_app/core/constant/status.dart';
+import 'package:inventory_app/core/util/utils.dart';
 import 'package:inventory_app/data/model/product/product.dart';
 import 'package:inventory_app/data/repositories/user_repotiory.dart';
 import 'package:inventory_app/presentation/screens/create_product/cubit/create_product_state.dart';
@@ -93,7 +94,12 @@ class CreateProductCubit extends Cubit<CreateProductState> {
 
       final excecutor = await Future.wait(updateProducts);
 
-      emit(state.copyWith(status: Status.success, products: excecutor));
+      emit(
+        state.copyWith(
+          status: Status.success,
+          products: Utils.sortByDate(excecutor),
+        ),
+      );
     } on FirebaseException catch (error) {
       emit(state.copyWith(status: Status.failure, message: '${error.message}'));
     }

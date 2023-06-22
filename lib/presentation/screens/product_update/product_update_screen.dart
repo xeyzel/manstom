@@ -55,7 +55,18 @@ class _ProductUpdateScreenState extends State<ProductUpdateScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Image.network(widget.product.image, height: 200),
+                Container(
+                  clipBehavior: Clip.hardEdge,
+                  width: MediaQuery.of(context).size.width,
+                  height: 250,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                  ),
+                  child: Image.network(
+                    widget.product.image,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 const SizedBox(height: 16),
                 Text(
                   'Price: ${widget.product.price}',

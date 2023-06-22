@@ -14,6 +14,7 @@ class Transaction with _$Transaction {
     @Default("") String createdAt,
     @Default("") String idTransaction,
     @Default("") String userId,
+    @Default(false) bool isIncrease,
   }) = _Transaction;
 
   factory Transaction.fromJson(Map<String, dynamic> json) =>

@@ -9,10 +9,12 @@ import 'package:inventory_app/presentation/widgets/custom_app_bar.dart';
 
 class ProductMainFeatureScreen extends StatefulWidget {
   final Product product;
+  final bool isFromHome;
 
   const ProductMainFeatureScreen({
     super.key,
     required this.product,
+    this.isFromHome = false,
   });
 
   @override
@@ -65,9 +67,17 @@ class _ProductMainFeatureScreenState extends State<ProductMainFeatureScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              Image.network(
-                widget.product.image,
-                height: 200,
+              Container(
+                clipBehavior: Clip.hardEdge,
+                width: MediaQuery.of(context).size.width,
+                height: 250,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32),
+                ),
+                child: Image.network(
+                  widget.product.image,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(height: 16),
               Container(
@@ -95,17 +105,64 @@ class _ProductMainFeatureScreenState extends State<ProductMainFeatureScreen> {
                 keyboardType: TextInputType.number,
                 controller: _price,
                 decoration: const InputDecoration(
-                  label: Text('Price'),
+                  label: Text('Change Price'),
                 ),
+              ),
+              Container(
+                width: 180,
+                padding: EdgeInsets.all(8),
+                margin: EdgeInsets.symmetric(vertical: 16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey, width: 2),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: BlocBuilder<ProductMainFeatureCubit,
+                    ProductMainFeatureState>(
+                  builder: (context, state) {
+                    return Row(
+                      children: [
+                        Switch(
+                          value: state.isAdded,
+                          onChanged: context
+                              .read<ProductMainFeatureCubit>()
+                              .setIsAdded,
+                        ),
+                        Text(
+                          state.isAdded ? "Decrease" : 'Increase',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 16,
+                            color: state.isAdded ? Colors.red : Colors.green,
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              BlocBuilder<ProductMainFeatureCubit, ProductMainFeatureState>(
+                builder: (context, state) {
+                  return Container(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Quantity Now : ${state.product.quantity}',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  );
+                },
               ),
               const SizedBox(height: 16),
               TextField(
                 keyboardType: TextInputType.number,
                 controller: _quantity,
                 decoration: const InputDecoration(
-                  label: Text('Quantity'),
+                  label: Text('Change Quantity'),
                 ),
               ),
+              const SizedBox(height: 24),
               BlocConsumer<ProductMainFeatureCubit, ProductMainFeatureState>(
                 listenWhen: (previous, current) {
                   return previous.status != current.status;
@@ -113,6 +170,9 @@ class _ProductMainFeatureScreenState extends State<ProductMainFeatureScreen> {
                 listener: (context, state) {
                   if (state.status == Status.success) {
                     Navigator.pop(context);
+                    if (!widget.isFromHome) {
+                      Navigator.pop(context);
+                    }
                   }
                 },
                 builder: (context, state) {
@@ -120,29 +180,33 @@ class _ProductMainFeatureScreenState extends State<ProductMainFeatureScreen> {
                     return const CenterLoading();
                   }
 
-                  return ElevatedButton(
-                    onPressed: () {
-                      final price = int.parse(_price.text);
-                      final quantity = int.parse(_quantity.text);
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        final price = int.parse(_price.text);
+                        final quantity = int.parse(_quantity.text);
 
-                      context.read<ProductMainFeatureCubit>().setPrice(price);
-                      context
-                          .read<ProductMainFeatureCubit>()
-                          .setQuantity(quantity);
+                        context.read<ProductMainFeatureCubit>().setPrice(price);
+                        context
+                            .read<ProductMainFeatureCubit>()
+                            .setQuantity(quantity);
 
-                      final newProduct = widget.product.copyWith(
-                        price: price,
-                        quantity: quantity,
-                      );
+                        final newProduct = widget.product.copyWith(
+                          price: price,
+                          quantity: quantity,
+                        );
 
-                      context
-                          .read<ProductMainFeatureCubit>()
-                          .updateProduct(newProduct);
-                    },
-                    child: const Text('Save'),
+                        context
+                            .read<ProductMainFeatureCubit>()
+                            .updateProduct(newProduct);
+                      },
+                      child: const Text('Save'),
+                    ),
                   );
                 },
               ),
+              const SizedBox(height: 50),
             ],
           ),
         ),

@@ -20,6 +20,7 @@ mixin _$ProductMainFeatureState {
   Product get product => throw _privateConstructorUsedError;
   int get price => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
+  bool get isAdded => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProductMainFeatureStateCopyWith<ProductMainFeatureState> get copyWith =>
@@ -32,7 +33,8 @@ abstract class $ProductMainFeatureStateCopyWith<$Res> {
           $Res Function(ProductMainFeatureState) then) =
       _$ProductMainFeatureStateCopyWithImpl<$Res, ProductMainFeatureState>;
   @useResult
-  $Res call({Status status, Product product, int price, int quantity});
+  $Res call(
+      {Status status, Product product, int price, int quantity, bool isAdded});
 
   $ProductCopyWith<$Res> get product;
 }
@@ -55,6 +57,7 @@ class _$ProductMainFeatureStateCopyWithImpl<$Res,
     Object? product = null,
     Object? price = null,
     Object? quantity = null,
+    Object? isAdded = null,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -73,6 +76,10 @@ class _$ProductMainFeatureStateCopyWithImpl<$Res,
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
+      isAdded: null == isAdded
+          ? _value.isAdded
+          : isAdded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -93,7 +100,8 @@ abstract class _$$_ProductMainFeatureStateCopyWith<$Res>
       __$$_ProductMainFeatureStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Status status, Product product, int price, int quantity});
+  $Res call(
+      {Status status, Product product, int price, int quantity, bool isAdded});
 
   @override
   $ProductCopyWith<$Res> get product;
@@ -115,6 +123,7 @@ class __$$_ProductMainFeatureStateCopyWithImpl<$Res>
     Object? product = null,
     Object? price = null,
     Object? quantity = null,
+    Object? isAdded = null,
   }) {
     return _then(_$_ProductMainFeatureState(
       status: null == status
@@ -133,6 +142,10 @@ class __$$_ProductMainFeatureStateCopyWithImpl<$Res>
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
               as int,
+      isAdded: null == isAdded
+          ? _value.isAdded
+          : isAdded // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -144,7 +157,8 @@ class _$_ProductMainFeatureState implements _ProductMainFeatureState {
       {this.status = Status.initial,
       this.product = const Product(),
       this.price = 0,
-      this.quantity = 0});
+      this.quantity = 0,
+      this.isAdded = false});
 
   @override
   @JsonKey()
@@ -158,10 +172,13 @@ class _$_ProductMainFeatureState implements _ProductMainFeatureState {
   @override
   @JsonKey()
   final int quantity;
+  @override
+  @JsonKey()
+  final bool isAdded;
 
   @override
   String toString() {
-    return 'ProductMainFeatureState(status: $status, product: $product, price: $price, quantity: $quantity)';
+    return 'ProductMainFeatureState(status: $status, product: $product, price: $price, quantity: $quantity, isAdded: $isAdded)';
   }
 
   @override
@@ -173,12 +190,13 @@ class _$_ProductMainFeatureState implements _ProductMainFeatureState {
             (identical(other.product, product) || other.product == product) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.quantity, quantity) ||
-                other.quantity == quantity));
+                other.quantity == quantity) &&
+            (identical(other.isAdded, isAdded) || other.isAdded == isAdded));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, status, product, price, quantity);
+      Object.hash(runtimeType, status, product, price, quantity, isAdded);
 
   @JsonKey(ignore: true)
   @override
@@ -194,7 +212,8 @@ abstract class _ProductMainFeatureState implements ProductMainFeatureState {
       {final Status status,
       final Product product,
       final int price,
-      final int quantity}) = _$_ProductMainFeatureState;
+      final int quantity,
+      final bool isAdded}) = _$_ProductMainFeatureState;
 
   @override
   Status get status;
@@ -204,6 +223,8 @@ abstract class _ProductMainFeatureState implements ProductMainFeatureState {
   int get price;
   @override
   int get quantity;
+  @override
+  bool get isAdded;
   @override
   @JsonKey(ignore: true)
   _$$_ProductMainFeatureStateCopyWith<_$_ProductMainFeatureState>
