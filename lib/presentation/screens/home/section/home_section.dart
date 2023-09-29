@@ -355,6 +355,30 @@ class HomeSection extends StatelessWidget {
             height: 200,
             child: BlocBuilder<HomeCubit, HomeState>(
               builder: (context, state) {
+
+
+
+                if(state.products.isEmpty) {
+                  return Container(
+                    padding: const EdgeInsets.all(16),
+                    margin: const EdgeInsets.all(16),
+
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(offset: const Offset(0,5), blurRadius: 8, color: Colors.grey.shade300)],
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Column(
+                      children: [
+                        Image.asset('assets/images/no-task.png', width: 100),
+                        const SizedBox(height: 16),
+                        const Text('There is No Products'),
+                      ],
+                    ),
+                  );
+                }
+
+
                 return ListView.separated(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   scrollDirection: Axis.horizontal,

@@ -1,4 +1,3 @@
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inventory_app/core/constant/status.dart';
@@ -21,8 +20,13 @@ class HomeCubit extends Cubit<HomeState> {
       final products = await _repository.findAllProduct();
       final productFiltered =
           products.where((element) => element.quantity <= 10);
+
       var newProduct = products.toList();
-      newProduct = Utils.sortByDate(newProduct).toList().sublist(0,5);
+
+      if (newProduct.isNotEmpty && newProduct.length >= 5) {
+        newProduct = Utils.sortByDate(newProduct).toList().sublist(0, 5);
+      }
+
       await getTransaction();
       emit(state.copyWith(
         status: Status.success,
@@ -41,11 +45,9 @@ class HomeCubit extends Cubit<HomeState> {
     try {
       final transactions = await _repository.findAllTransactions();
       if (transactions.isNotEmpty && transactions.length >= 3) {
-        rawTransaction = Utils.sortTransactionByDate(transactions)
-            .toList()
-            .sublist(0, 3);
-        
-      }else{
+        rawTransaction =
+            Utils.sortTransactionByDate(transactions).toList().sublist(0, 3);
+      } else {
         rawTransaction = Utils.sortTransactionByDate(transactions);
       }
 
